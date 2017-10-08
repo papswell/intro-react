@@ -1,0 +1,19 @@
+{
+  "name": "jquery-vs-react",
+  "version": "0.0.1",
+  "description": "A simple comparison between jQuery and React way of thinking.",
+  "scripts": {
+    "build": "babel src -d dist",
+    "dev": "rm -rf dist && mkdir dist && npm run build && node bin/dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "browser-sync": "^2.18.13",
+    "gaze": "^1.1.2"
+  }
+}

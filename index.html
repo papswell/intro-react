@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jquery / React</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <style>
+      #app-container {
+        display: flex;
+      }
+
+      .container {
+        width: 50%;
+        height: 100vh;
+        padding: 20px;
+      }
+
+      .container:first-child {
+        border-right: 1px #eee solid;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <div id="app-container">
+
+      <div class="container">
+        <h2> jQuery Application</h2>
+        <div id="jquery-app" class="app"></div>
+      </div>
+
+      <div class="container">
+        <h2> React Application</h2>
+        <div id="react-app" class="app"></div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+
+    <script src="/dist/app.jquery.js"></script>
+    <script src="/dist/app.react.js"></script>
+  </body>
+</html>
