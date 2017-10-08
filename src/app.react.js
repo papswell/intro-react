@@ -19,7 +19,9 @@ class TweetBox extends React.Component {
 
   render() {
 
-    const disabled = this.state.text.length === 0;
+    const length = this.state.text.length;
+    const remaining = 140 - length;
+    const disabled = length === 0 || remaining < 0;
 
     return (
       <div className="well clearfix">
@@ -28,6 +30,9 @@ class TweetBox extends React.Component {
           onChange={this.handleChange}
         />
         <br/>
+        <span className="counter">
+          {remaining}
+        </span>
         <button
           className="btn btn-primary pull-right"
           disabled={disabled}
