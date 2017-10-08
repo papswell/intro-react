@@ -4,27 +4,44 @@ $(function() {
   var $textarea = $('#jquery-app textarea');
   var $counter  = $('#jquery-app .counter');
   var $photoButton = $('#jquery-app .photo-button');
+  var $alert = $('#jquery-app .alert');
 
   var isPhotoAdded = false;
 
-  // Initial state, button is disabled by default
+  function getAlertContent(text, maxValue) {
+    return $('<span> ...' + text.slice(maxValue - 10, maxValue) + '<strong>' + text.slice(maxValue)+ '</strong></span>');
+  }
+
+  // Initial state, button is disabled by default, alert is hidden
   $button.prop('disabled', true);
+  $alert.hide();
 
   // Event listener, we update the button state if needed
   $textarea.on('input', function() {
     const value = $(this).val();
     const valueLength = value.length;
 
-    let remaining = 140 - valueLength;
-    if (isPhotoAdded) {
-      remaining -= 23;
-    }
+    const maxValue = isPhotoAdded ? 140 - 23 : 140;
+    const remaining = maxValue - valueLength;
 
     // State of the tweet button
     $button.prop('disabled', (!valueLength || remaining < 0) && !isPhotoAdded);
 
     // Set the counter value
     $counter.text(remaining);
+
+    // Update the alert box
+    if (remaining < 0) {
+      $alert
+        .show()
+        .find('span')
+        .html(getAlertContent(value, maxValue))
+    } else {
+      $alert
+        .hide()
+        .find('span')
+        .html('');
+    }
 
   });
 
@@ -33,22 +50,45 @@ $(function() {
     // Toggle the variable
     isPhotoAdded = !isPhotoAdded;
 
-    // Update the app
     if (isPhotoAdded) {
+
+      const maxValue = 140 - 23;
+      const remaining = maxValue - $textarea.val().length;
+
       // Set button content
       $(this).text('Photo added :)');
       // Update counter
-      $counter.text(140 - $textarea.val().length - 23);
+      $counter.text(remaining);
       // Update tweet button
       $button.prop('disabled', false);
+      // Update the alert
+      if (remaining < 0) {
+        $alert.show();
+        $alert
+          .find('span')
+          .html(getAlertContent($textarea.val(), maxValue))
+      } else {
+        $alert
+          .hide()
+          .find('span').html('');
+      }
     } else {
+      const remaining = 140 - $textarea.val().length;
+
       // Set button content
       $(this).text('Add a photo');
       // Update counter
-      $counter.text(140 - $textarea.val().length);
+      $counter.text(remaining);
       // Update tweet button (if needed)
       if ($textarea.val().length === 0) {
         $button.prop('disabled', true);
+      }
+      // Update the alert
+      if (remaining < 0) {
+        $alert.show()
+          .find('span').html(getAlertContent($textarea.val(), 140))
+      } else {
+        $alert.hide().find('span').html('');
       }
     }
   });

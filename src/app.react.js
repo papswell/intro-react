@@ -33,6 +33,27 @@ class TweetBox extends React.Component {
     return remaining;
   }
 
+  renderOverflowAlert() {
+    const { text, isPhotoAdded } = this.state;
+    const maxValue = isPhotoAdded ? 140 - 23 : 140;
+    const validText = text.slice(maxValue - 10, maxValue);
+    const extraText = text.slice(maxValue);
+
+    return (
+      <div class="alert alert-danger" role="alert">
+        <strong>Tweet too long !</strong>
+        <br />
+        <span>
+          ...&nbsp;
+          {validText}
+          <strong>
+            {extraText}
+          </strong>
+        </span>
+      </div>
+    )
+  }
+
   render() {
     const { text, isPhotoAdded } = this.state;
 
@@ -43,6 +64,7 @@ class TweetBox extends React.Component {
 
     return (
       <div className="well clearfix">
+        {remaining < 0 && this.renderOverflowAlert()}
         <textarea
           className="form-control"
           onChange={this.handleChange}
