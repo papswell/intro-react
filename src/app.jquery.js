@@ -25,7 +25,7 @@ $(function() {
     const remaining = maxValue - valueLength;
 
     // State of the tweet button
-    $button.prop('disabled', (!valueLength || remaining < 0) && !isPhotoAdded);
+    $button.prop('disabled', (remaining === 140 || remaining < 0));
 
     // Set the counter value
     $counter.text(remaining);
@@ -60,7 +60,7 @@ $(function() {
       // Update counter
       $counter.text(remaining);
       // Update tweet button
-      $button.prop('disabled', false);
+      $button.prop('disabled', remaining < 0);
       // Update the alert
       if (remaining < 0) {
         $alert.show();

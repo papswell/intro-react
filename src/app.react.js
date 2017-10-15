@@ -57,10 +57,8 @@ class TweetBox extends React.Component {
   render() {
     const { text, isPhotoAdded } = this.state;
 
-    const length = text.length;
     const remaining = this.getRemainingCharacters();
-
-    const disabled = (length === 0 || remaining < 0) && !isPhotoAdded;
+    const disabled = remaining === 140 || remaining < 0;
 
     return (
       <div className="well clearfix">
